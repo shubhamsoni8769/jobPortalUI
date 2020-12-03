@@ -1,0 +1,86 @@
+<div class="form-center-align">
+    <div class="modal-header">
+        <h1 class="modal-title" id="modal-basic-title">Broadcast CV</h1>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="myForm">
+            <div class="form-group">
+                <input type="text" class="form-control" id="name" placeholder="Enter Your Name" formControlName="name">
+            </div>
+            <div *ngIf="myForm.controls['name'].invalid && (myForm.controls['name'].dirty || myForm.controls['name'].touched ) "
+                style="color:red">
+                <div *ngIf="myForm.controls['name'].errors.required">
+                    name is required
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp"
+                    placeholder="Enter email">
+            </div>
+            <div *ngIf="myForm.controls['email'].invalid && (myForm.controls['email'].dirty || myForm.controls['email'].touched ) "
+                style="color:red">
+                <div *ngIf="myForm.controls['email'].errors.required">
+                    Email is required
+                </div>
+                <div *ngIf="myForm.controls['email'].errors.email">
+                    please enter email in correct format
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="tel" class="form-control" id="phoneNo" placeholder="Enter Phone Number"
+                    formControlName="phoneNo">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="location" [ngbTypeahead]="search" formControlName="location"
+                    placeholder="What's your preferred job location">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="JobFunction" formControlName="JobFunction"
+                    placeholder="What functional role you are looking for">
+            </div>
+            <div class="form-group">
+                <label for="ExpectedCTC">Expected salary range</label>
+                <select class="form-control" id="ExpectedCTC" formControlName="ExpectedCTC">
+                    <option>300000-500000</option>
+                    <option>500000-700000</option>
+                    <option>700000+</option>
+                    <!-- <option>90 Days</option> -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="experience">Are you a fresher?</label>
+                <br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" formControlName="experienced" type="radio" name="experienced"
+                        id="inlineRadio1" value="true">
+                    <label class="form-check-label" for="inlineRadio1">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" formControlName="experienced" type="radio" name="experienced"
+                        id="inlineRadio2" value="false">
+                    <label class="form-check-label" for="inlineRadio2">No</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="noticePeriod">How soon are you available to start?</label>
+                <select class="form-control" id="noticePeriod" formControlName="noticePeriod">
+                    <option>15 Days</option>
+                    <option>30 Days</option>
+                    <option>60 Days</option>
+                    <option>90 Days</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="file" class="form-control" id="resume" placeholder="Upload Resume"
+                    (change)="loadPdf($event)">
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success btn-outline-dark" [disabled]="myForm.pristine || myForm.invalid" (click)="register()">Submit</button>
+    </div>
+</div>
+<!-- </ng-template> -->
